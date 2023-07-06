@@ -2,6 +2,7 @@ import React from "react";
 import { useTodoStore } from "../../data/stores/useToDotore";
 import { InputPlus } from "../components/InputPlus"
 import styles from "./index.module.scss";
+import { InputTask } from "../components/InputTask";
 
 export const App: React.FC = () => {
   const [
@@ -30,7 +31,19 @@ export const App: React.FC = () => {
       </section>
 
       <section className={styles.articleSection}>
-
+        {!tasks.length && (
+          <p className={styles.articleText}>No task</p>
+        )}
+        {tasks.map((task) => (
+          <InputTask 
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            onDone={removeTask}
+            onEdited={updateTask}
+            onRemoved={removeTask}
+          />
+        ))}
       </section>
     </article>
   )
